@@ -2,7 +2,7 @@ package org.shaun.itunessearch.database
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
-import org.json.JSONArray
+import org.json.JSONObject
 import org.shaun.itunessearch.modelclass.ITunesItem
 
 class ItunesTypeConverter {
@@ -20,10 +20,11 @@ class ItunesTypeConverter {
          */
 
 
-        val json =JSONArray(result)
+        val json =JSONObject(result)
+        val jsonArray=json.getJSONArray("list")
         val itunesList:MutableList<ITunesItem> = arrayListOf()
-        for (i in 0 until json.length()){
-            val item=json.getJSONObject(i)
+        for (i in 0 until jsonArray.length()){
+            val item=jsonArray.getJSONObject(i)
             val artistName=item.getString("artistName")
             val artworkUrl100=item.getString("artworkUrl100")
             val collectionName=item.getString("collectionName")
