@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object Retrofit {
 
     fun getRetrofit():Retrofit{
-        val gson: Gson = GsonBuilder()
+        val gSon: Gson = GsonBuilder()
             .setLenient()
             .create()
         val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -20,7 +20,7 @@ object Retrofit {
             .addInterceptor(logging)
             .build()
          return  Retrofit.Builder().baseUrl("https://itunes.apple.com/")
-            .addConverterFactory(GsonConverterFactory.create(gson))
+            .addConverterFactory(GsonConverterFactory.create(gSon))
             .client(client)
             .build()
 

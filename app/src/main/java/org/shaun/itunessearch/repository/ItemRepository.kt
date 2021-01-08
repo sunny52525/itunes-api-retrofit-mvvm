@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.shaun.itunessearch.dao.ItunesDao
-import org.shaun.itunessearch.database.Dblist
+import org.shaun.itunessearch.database.DBWrapper
 import org.shaun.itunessearch.database.Itunes
 import org.shaun.itunessearch.modelclass.ResultModel
 
@@ -18,7 +18,6 @@ import retrofit2.Response
 private const val TAG = "ItemRepository"
 
 class ItemRepository(val dao: ItunesDao) {
-
     var apiRequest: APIRequest = Retrofit.getRetrofit().create(APIRequest::class.java)
     val data = MutableLiveData<ResultModel>()
     fun getResult(query: String): MutableLiveData<ResultModel>? {
@@ -27,19 +26,18 @@ class ItemRepository(val dao: ItunesDao) {
             .enqueue(object : Callback<ResultModel> {
                 override fun onFailure(call: Call<ResultModel>, t: Throwable) {
                     Log.d(TAG, "onFailure: $t")
+
+
                     GlobalScope.launch {
-
-                    val offLineData = dao.getOfflineData(query)
-                    Log.e(TAG, "onFailure: ${offLineData.list}")
-                        val resultModel=ResultModel()
-                        resultModel.results=offLineData.list
-                    if (offLineData!= null) {
-                        data.postValue(resultModel)
-
-                        Log.d(TAG, "onFailure: $data.")
-                    }else{
-                        Log.e(TAG, "onFailure: 0000000000" )
-                    }
+                        val offLineData = dao.getOfflineData(query)
+                        if (offLineData != null) {
+                            val resultModel = ResultModel()
+                            resultModel.results = offLineData.list
+                            data.postValue(resultModel)
+                            Log.d(TAG, "onFailure: $data.")
+                        } else {
+                            data.postValue(ResultModel())  //no Data
+                        }
 
                     }
                 }
@@ -47,7 +45,7 @@ class ItemRepository(val dao: ItunesDao) {
                 override fun onResponse(call: Call<ResultModel>, response: Response<ResultModel>) {
                     data.value = response.body()
 
-                    val itunesItem= Itunes(query, (Dblist(data.value?.results!!))!!)
+                    val itunesItem = Itunes(query, (DBWrapper(data.value?.results!!))!!)
                     GlobalScope.launch {
                         dao.insert(itunesItem)
                     }

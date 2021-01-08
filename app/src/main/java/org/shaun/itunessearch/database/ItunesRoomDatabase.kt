@@ -11,7 +11,7 @@ import org.shaun.itunessearch.dao.ItunesDao
 @TypeConverters(ItunesTypeConverter::class)
 abstract class ItunesRoomDatabase : RoomDatabase() {
 
-    abstract fun ItunesDao(): ItunesDao
+    abstract fun itunesDao(): ItunesDao
 
     companion object {
         @Volatile

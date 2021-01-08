@@ -9,9 +9,4 @@ class ResultModel {
     @SerializedName("results")
     @Expose
     var results:List<ITunesItem>?=null
-
-
-    private fun setresults(result:List<ITunesItem>){
-        this.results=results
-    }
 }
