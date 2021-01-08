@@ -13,9 +13,9 @@ private const val TAG = "ItemRepository"
 class ItemRepository{
 
     var apiRequest:APIRequest = Retrofit.getRetrofit().create(APIRequest::class.java)
-
+    val data=MutableLiveData<ResultModel>()
     fun getResult(query:String) :MutableLiveData<ResultModel>?{
-        val data=MutableLiveData<ResultModel>()
+
         apiRequest.getResult(query)
             .enqueue(object : Callback<ResultModel> {
                 override fun onFailure(call: Call<ResultModel>, t: Throwable) {

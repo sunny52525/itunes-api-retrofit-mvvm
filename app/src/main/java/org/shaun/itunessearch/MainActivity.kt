@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             MultiSearchView.MultiSearchViewListener {
             override fun onItemSelected(index: Int, s: CharSequence) {
                 Log.v("TEST", "onItemSelected: index: $index, query: $s")
+                getNewData(s.toString())
             }
 
             override fun onTextChanged(index: Int, s: CharSequence) {
@@ -61,9 +62,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onSearchItemRemoved(index: Int) {
                 Log.v("TEST", "remove: index: $index")
-                Log.d(TAG, "onSearchItemRemoved: ${viewModel.itunesLiveData?.value?.results}")
-                adapter.updateData(viewModel.itunesLiveData?.value?.results!!   )
-                adapter.notifyDataSetChanged()
+
             }
         })
     }

@@ -18,11 +18,11 @@ class ITunesViewModel(application: Application) : AndroidViewModel(application) 
         this.itunesLiveData = itemRepository.getResult("lorde")
     }
 
-    fun getItemList() = itunesLiveData
+    fun getItemList() = this.itunesLiveData
 
     fun getNewData(queryNew: String) {
-        Log.d(TAG, "getNewData: $queryNew")
         itemRepository.getResult(queryNew)
+        this.itunesLiveData?.postValue(itemRepository.data.value)
         Log.d(TAG, "getNewData: ${itunesLiveData?.value?.results}")
     }
 }
