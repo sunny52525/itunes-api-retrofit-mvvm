@@ -6,14 +6,12 @@ import com.google.gson.annotations.SerializedName
 
 
 class ResultModel {
-
-    @SerializedName("resultCount")
-    @Expose
-    var resultCount:Int=0
-
     @SerializedName("results")
     @Expose
-    var results:List<iTunesItem>?=null
+    var results:List<ITunesItem>?=null
 
 
+    private fun setresults(result:List<ITunesItem>){
+        this.results=results
+    }
 }

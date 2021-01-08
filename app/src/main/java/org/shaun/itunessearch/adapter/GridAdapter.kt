@@ -9,15 +9,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import org.shaun.itunessearch.R
-import org.shaun.itunessearch.modelclass.iTunesItem
+import org.shaun.itunessearch.modelclass.ITunesItem
 
 private const val TAG = "GridAdapter"
-class GridAdapter(private var data: List<iTunesItem> = emptyList<iTunesItem>()) : RecyclerView.Adapter<GridAdapter.ItemsViewHolder>() {
+class GridAdapter(private var data: List<ITunesItem> = emptyList<ITunesItem>()) : RecyclerView.Adapter<GridAdapter.ItemsViewHolder>() {
 
 
     class ItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val coverImage = itemView.findViewById<ImageView>(R.id.artwork)
-        val artistName = itemView.findViewById<TextView>(R.id.artist_name)
+        val coverImage: ImageView = itemView.findViewById<ImageView>(R.id.artwork)
+        val artistName: TextView = itemView.findViewById<TextView>(R.id.artist_name)
         val collection = itemView.findViewById<TextView>(R.id.collection)
     }
 
@@ -37,7 +37,7 @@ class GridAdapter(private var data: List<iTunesItem> = emptyList<iTunesItem>()) 
         Picasso.get().load(current.artworkUrl100).into(holder.coverImage)
     }
 
-    internal fun updateData(newData: List<iTunesItem>) {
+    internal fun updateData(newData: List<ITunesItem>) {
         Log.e(TAG, "updateData: CALLED " )
         this.data=newData
         notifyDataSetChanged()

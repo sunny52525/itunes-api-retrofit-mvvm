@@ -1,40 +1,32 @@
 package org.shaun.itunessearch.modelclass
 
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 
 
-class iTunesItem {
+data class ITunesItem(
     @SerializedName("wrapperType")
     @Expose
-    var wrapperType :String=""
+    var wrapperType: String?,
 
     @SerializedName("artistName")
     @Expose
-    var artistName =""
+    var artistName: String ?,
 
     @SerializedName("collectionName")
     @Expose
-    var collectionName=""
+    var collectionName: String?,
 
     @SerializedName("artistViewUrl")
     @Expose
-    var artistViewUrl=""
+    var artistViewUrl: String? ,
 
     @SerializedName("artworkUrl100")
     @Expose
-    var artworkUrl100=""
+    var artworkUrl100: String ?
 
 
-    override fun toString(): String {
-        return """
-            $wrapperType
-            $artistName
-            $collectionName
-            $artistViewUrl
-            $artworkUrl100
-        """.trimIndent()
-    }
+){
 
 }
+
