@@ -11,7 +11,7 @@ data class ITunesItem(
 
     @SerializedName("artistName")
     @Expose
-    var artistName: String ?,
+    var artistName: String?,
 
     @SerializedName("collectionName")
     @Expose
@@ -19,7 +19,7 @@ data class ITunesItem(
 
     @SerializedName("artworkUrl100")
     @Expose
-    var artworkUrl100: String ?
+    var artworkUrl100: String?
 ){
 
 }

@@ -26,9 +26,7 @@
         <item name="android:textColorHint">#80999999</item>
         <item name="android:textColor">#000</item>
         <item name="android:background">#000</item>
-
-        <item name="srcCompat">@drawable/searchicon</item>
-    </style>
+</style>
 
     <color name="heading">#000</color>
     <color name="background">#FFF</color>

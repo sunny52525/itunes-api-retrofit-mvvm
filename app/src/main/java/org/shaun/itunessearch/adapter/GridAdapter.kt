@@ -10,14 +10,17 @@ import com.squareup.picasso.Picasso
 import org.shaun.itunessearch.R
 import org.shaun.itunessearch.modelclass.ITunesItem
 
-class GridAdapter(private var data: List<ITunesItem>? = emptyList<ITunesItem>()) : RecyclerView.Adapter<GridAdapter.ItemsViewHolder>() {
+class ItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val coverImage: ImageView = itemView.findViewById(R.id.artwork)
+    val artistName: TextView = itemView.findViewById(R.id.artist_name)
+    val collection: TextView = itemView.findViewById(R.id.collection)
+}
 
+class GridAdapter(
+    private var data: List<ITunesItem>? = emptyList()
 
-    class ItemsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val coverImage: ImageView = itemView.findViewById<ImageView>(R.id.artwork)
-        val artistName: TextView = itemView.findViewById<TextView>(R.id.artist_name)
-        val collection: TextView = itemView.findViewById<TextView>(R.id.collection)
-    }
+) : RecyclerView.Adapter<ItemsViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsViewHolder {
         val itemView =
@@ -25,11 +28,10 @@ class GridAdapter(private var data: List<ITunesItem>? = emptyList<ITunesItem>())
         return ItemsViewHolder(itemView)
     }
 
-    override fun getItemCount() :Int
-    {
-        return if (data==null) {
+    override fun getItemCount(): Int {
+        return if (data == null) {
             0
-        }else{
+        } else {
             data!!.size
         }
     }
@@ -42,7 +44,8 @@ class GridAdapter(private var data: List<ITunesItem>? = emptyList<ITunesItem>())
     }
 
     internal fun updateData(newData: List<ITunesItem>?) {
-        this.data=newData
+
+        this.data = newData
         notifyDataSetChanged()
     }
 

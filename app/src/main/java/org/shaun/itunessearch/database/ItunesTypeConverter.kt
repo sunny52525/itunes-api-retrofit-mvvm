@@ -9,18 +9,16 @@ import org.shaun.itunessearch.modelclass.ITunesItem
 private const val TAG = "ItunesTypeConverter"
 
 class ItunesTypeConverter {
-    val gSon = Gson()
+    private val gSon = Gson()
 
     @TypeConverter
     fun stringToDBWrapper(result: String): DBWrapper {
 
 
-//        For Some reason this wasn't working so I wrote my own Json Parser
+        // For Some reason this wasn't working so I wrote my own Json Parser
 
-        /**
-         *  val listType = object : TypeToken<DBWrapper>() {}.type
-         *  return gSon.fromJson(result, listType)
-         */
+        //val listType = object : TypeToken<DBWrapper>() {}.type
+        //  return gSon.fromJson(result, listType)
 
 
         val itunesList: MutableList<ITunesItem> = arrayListOf()

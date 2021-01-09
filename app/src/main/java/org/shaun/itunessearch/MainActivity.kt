@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: ITunesViewModel
     private lateinit var binding: ActivityMainBinding
     private val adapter = GridAdapter(emptyList())
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -37,11 +39,7 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.getItemList()?.observe(this, Observer {
             if (it != null) {
-                Log.d(TAG, "getData: ${it.results}")
                 adapter.updateData(it.results)
-                adapter.notifyDataSetChanged()
-            } else {
-                Log.d(TAG, "getData: NULL")
             }
 
             binding.progressBar.visibility = View.GONE
@@ -51,21 +49,21 @@ class MainActivity : AppCompatActivity() {
         binding.multiSearchView.setSearchViewListener(object :
             MultiSearchView.MultiSearchViewListener {
             override fun onItemSelected(index: Int, s: CharSequence) {
-                Log.v("TEST", "onItemSelected: index: $index, query: $s")
+                Log.v(TAG, "onItemSelected: index: $index, query: $s")
                 getNewData(s.toString())
             }
 
             override fun onTextChanged(index: Int, s: CharSequence) {
-                Log.v("TEST", "changed: index: $index, query: $s")
+                Log.v(TAG, "changed: index: $index, query: $s")
             }
 
             override fun onSearchComplete(index: Int, s: CharSequence) {
-                Log.v("TEST", "complete: index: $index, query: $s")
+                Log.v(TAG, "complete: index: $index, query: $s")
                 getNewData(s.toString())
             }
 
             override fun onSearchItemRemoved(index: Int) {
-                Log.v("TEST", "remove: index: $index")
+                Log.v(TAG, "remove: index: $index")
 
             }
         })
@@ -83,5 +81,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getOrientation() = resources.configuration.orientation
+
 
 }
